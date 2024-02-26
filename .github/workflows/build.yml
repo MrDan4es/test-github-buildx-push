@@ -10,6 +10,7 @@ jobs:
   build_oci_push:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -27,6 +28,5 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
           push: true
           tags: ghcr.io/mrdan4es/test-github-buildx-push:latest
