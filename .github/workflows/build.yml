@@ -29,4 +29,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/mrdan4es/test-github-buildx-push:latest
+          tags: ghcr.io/murawev/test-github-buildx-push:latest
