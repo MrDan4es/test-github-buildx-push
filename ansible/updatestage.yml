@@ -1,0 +1,22 @@
+name: updateansible
+hosts: all
+roles:
+  - amtega.artifact
+become: true
+tasks:
+  - name: stop docker compose
+    shell:
+      cmd: "docker compose down"
+  - name: artifact
+    id: artifact1
+    type: github
+    host: https://github.com
+    project: test-github-buildx-push/ansible
+    branch: main
+    file: docker-compose.yml
+    dest: git@github.com:Murawev/test-github-buildx-push.git
+    validate_certs: false
+  - name: Run container
+    shell:
+      cmd: "docker compose -f docker-compose.yml up --pull=always"
+      chdir: /test-github-buildx-push/
