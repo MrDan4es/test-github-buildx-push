@@ -14,9 +14,10 @@ jobs:
           name: artifact1
           path: docker-compose/docker-compose.yml
       - name: Run ansible playbook
-        run: |
-          cd test-github-buildx-push/ansible
-          ansible-playbook -i inventory updatestage.yml
+        uses: ./ansible
+        with:
+          playbook: updatestage.yml
+          inventory: inventory 
 
 
           
