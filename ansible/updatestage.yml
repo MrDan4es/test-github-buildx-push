@@ -16,7 +16,8 @@ tasks:
     file: docker-compose.yml
     dest: git@github.com:Murawev/test-github-buildx-push.git
     validate_certs: false
-  - name: Run container
-    shell:
-      cmd: "docker compose -f docker-compose.yml up --pull=always"
-      chdir: /test-github-buildx-push/
+  - name: Run docker-compose
+    community.docker.docker_compose:
+      project_src: /test-github-buildx-push/
+      build: false
+      register: output
