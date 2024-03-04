@@ -15,6 +15,7 @@ jobs:
           path: docker-compose/
       - name: Run ansible playbook
         run: |
+          cd test-github-buildx-push/ansible
           ansible-playbook -i inventory.ini updatestage.yml
 
 
