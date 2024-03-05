@@ -3,9 +3,10 @@
   hosts: all
   become: true
   tasks:
-    - name: Stop docker compose
-      shell:
-        cmd: "docker compose down"
+    - name: Tear down existing services
+      community.docker.docker_compose:
+        project_src: /test-github-buildx-push/
+        state: absent
     - name: Copy docker-compose to remote server
       ansible.builtin.copy:
         src: ../docker-compose.yml
@@ -13,17 +14,11 @@
         owner: root
         group: root
         mode: '0644'
-    # - name: artifact
-    #   id: artifact1
-    #   type: github
-    #   host: https://github.com
-    #   project: test-github-buildx-push/ansible
-    #   branch: main
-    #   file: docker-compose.yml
-    #   dest: git@github.com:Murawev/test-github-buildx-push.git
-    #   validate_certs: false
     - name: Run docker-compose
       community.docker.docker_compose:
         project_src: /test-github-buildx-push/
         build: false
         register: output
+        state: present
+        pull: true
+        remove_orphans: true
