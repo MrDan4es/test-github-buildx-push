@@ -24,4 +24,5 @@
         project_src: /test-github-buildx-push/
         build: false
         state: present
+        pull: true
         remove_orphans: true
