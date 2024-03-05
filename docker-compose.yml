@@ -3,4 +3,4 @@ services:
   server:
     image: ghcr.io/murawev/test-github-buildx-push:latest
     ports:
-      - "3333:3333"
+      - "3334:3333"
