@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install ansible dependencies
         run: |
+          python --version
           pipx inject ansible-core requests docker
       - name: Run ansible playbook
         uses: dawidd6/action-ansible-playbook@v2
