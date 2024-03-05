@@ -23,7 +23,5 @@
       community.docker.docker_compose:
         project_src: /test-github-buildx-push/
         build: false
-        register: output
         state: present
-        pull: true
         remove_orphans: true
