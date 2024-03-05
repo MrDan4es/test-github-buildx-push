@@ -14,7 +14,7 @@ jobs:
           name: artifact1
           path: ./docker-compose.yml
       - name: Run ansible playbook
-        uses: actions/action-ansible-playbook@v2
+        uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: updatestage.yml
           directory: test-github-buildx-push/ansible
