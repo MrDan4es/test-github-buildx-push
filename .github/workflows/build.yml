@@ -36,9 +36,9 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-      - name: Setup ansible
+      - name: Install ansible dependencies
         run: |
-          pipx inject python3-docker
+          pipx inject ansible-core requests docker
       - name: Run ansible playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
