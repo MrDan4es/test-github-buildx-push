@@ -8,7 +8,7 @@
         cmd: "docker compose down"
     - name: Copy docker-compose to remote server
       ansible.builtin.copy:
-        src: ./test-github-buildx-push/docker-compose.yml
+        src: ../docker-compose.yml
         dest: /test-github-buildx-push/docker-compose.yml
         owner: root
         group: root

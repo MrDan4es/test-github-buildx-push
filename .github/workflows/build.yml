@@ -1,4 +1,4 @@
-name: Build Go binary and OCI image and push to CR
+name: Build Go binary & OCI image & push to CR & update remote server
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - 'main'
 
 jobs:
-
   build_oci_push:
     runs-on: ubuntu-latest
     steps:
@@ -30,3 +29,18 @@ jobs:
         with:
           push: true
           tags: ghcr.io/murawev/test-github-buildx-push:latest
+
+  update_remote:
+    runs-on: ubuntu-latest
+    needs: build_oci_push
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: Run ansible playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: updatestage.yml
+          directory: ./ansible
+          key: ${{secrets.SSH_KEY}}
+          options: |
+            --inventory ./inventory.ini
