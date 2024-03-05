@@ -18,19 +18,5 @@ jobs:
         with:
           playbook: updatestage.yml
           directory: ./ansible
-
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
+          options: |
+            --inventory ./ansible/inventory.ini
