@@ -1,20 +1,27 @@
 ---
-- name: updateansible
+- name: Updateansible
   hosts: all
   become: true
   tasks:
-    - name: stop docker compose
+    - name: Stop docker compose
       shell:
         cmd: "docker compose down"
-    - name: artifact
-      id: artifact1
-      type: github
-      host: https://github.com
-      project: test-github-buildx-push/ansible
-      branch: main
-      file: docker-compose.yml
-      dest: git@github.com:Murawev/test-github-buildx-push.git
-      validate_certs: false
+    - name: Copy docker-compose to remote server
+      ansible.builtin.copy:
+        src: ./test-github-buildx-push/docker-compose.yml
+        dest: /test-github-buildx-push/docker-compose.yml
+        owner: root
+        group: root
+        mode: '0644'
+    # - name: artifact
+    #   id: artifact1
+    #   type: github
+    #   host: https://github.com
+    #   project: test-github-buildx-push/ansible
+    #   branch: main
+    #   file: docker-compose.yml
+    #   dest: git@github.com:Murawev/test-github-buildx-push.git
+    #   validate_certs: false
     - name: Run docker-compose
       community.docker.docker_compose:
         project_src: /test-github-buildx-push/
