@@ -12,11 +12,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact1
-          path: docker-compose/
+          path: ./docker-compose.yml
       - name: Run ansible playbook
-        run: |
-          cd test-github-buildx-push/ansible
-          ansible-playbook -i inventory.ini updatestage.yml
+        uses: actions/action-ansible-playbook@v2
+        with:
+          playbook: updatestage.yml
+          directory: test-github-buildx-push/ansible
 
 
           
