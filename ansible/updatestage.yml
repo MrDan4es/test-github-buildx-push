@@ -1,10 +1,10 @@
 ---
-- hosts: all
-  become: true
-- name: install python with sdk  
+- name: install python with sdk
+  hosts: all
   roles:
   - python
 - name: play ans playbook
+  hosts: all
   roles:
   - ansible
     
