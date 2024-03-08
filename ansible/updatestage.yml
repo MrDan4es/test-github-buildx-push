@@ -4,6 +4,5 @@
   become: true
 - roles:
     - python
-    - ansible 
-
+    - ansible
     
