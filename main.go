@@ -9,7 +9,7 @@ import (
 const addr = ":3333"
 
 func getHello(w http.ResponseWriter, r *http.Request) {
-	_, err := io.WriteString(w, "asd-")
+	_, err := io.WriteString(w, "12312321 DID IT")
 	if err != nil {
 		fmt.Println(err)
 	}
