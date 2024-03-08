@@ -1,8 +1,10 @@
 ---
 - hosts: all
-- name: Updateansible
   become: true
-- roles:
-    - python
-    - ansible
+- name: install python with sdk  
+  roles:
+    role: python
+- name: play ans playbook
+  roles:
+    role: ansible
     
