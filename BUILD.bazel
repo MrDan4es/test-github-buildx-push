@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@rules_oci//oci:defs.bzl", "oci_image")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+
+# gazelle:prefix github.com/Murawev/test-github-buildx-push
+gazelle(name = "gazelle")
+
+go_library(
+    name = "test-github-buildx-push_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/Murawev/test-github-buildx-push",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "test-github-buildx-push",
+    embed = [":test-github-buildx-push_lib"],
+    visibility = ["//visibility:public"],
+)
+
+pkg_tar(
+    name = "layer",
+    srcs = [":test-github-buildx-push"],
+)
+
+oci_image(
+    name = "oci",
+    base = "@distroless_base_debian12",
+    entrypoint = ["test-github-buildx-push"],
+    tars = [":layer"],
+    visibility = ["//visibility:public"],
+)
