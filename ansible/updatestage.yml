@@ -3,8 +3,8 @@
   become: true
 - name: install python with sdk  
   roles:
-    role: python
+  - python
 - name: play ans playbook
   roles:
-    role: ansible
+  - ansible
     
