@@ -1,6 +1,6 @@
 ---
+- hosts: all
 - name: Updateansible
-  hosts: all
   become: true
 - roles:
     - python
